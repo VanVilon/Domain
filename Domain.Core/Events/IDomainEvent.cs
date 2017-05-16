@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Core
+namespace Domain.Core.Events
 {
     public interface IDomainEvent
     {
