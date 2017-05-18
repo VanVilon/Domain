@@ -6,7 +6,7 @@ using Domain.Core.Helpers;
 namespace Domain.Core
 {
     /// <summary>
-    /// Identifies this class as 'entity' container.
+    /// Overriden in a class, identifies this class as 'entity'.
     /// </summary>
     public abstract class Entity
     {
@@ -23,9 +23,9 @@ namespace Domain.Core
 
         public override bool Equals(object obj)
         {
-            if (Object.ReferenceEquals(null, obj))
+            if (object.ReferenceEquals(null, obj))
                 return false;
-            if (Object.ReferenceEquals(this, obj))
+            if (object.ReferenceEquals(this, obj))
                 return true;
             if (obj.GetType() != this.GetType())
                 return false;
