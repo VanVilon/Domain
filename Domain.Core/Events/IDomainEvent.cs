@@ -7,7 +7,7 @@ namespace Domain.Model.Events
     /// </summary>
     public interface IDomainEvent
     {
-        int Version { get; set; }
-        DateTime OccuredDate { get; set; }
+        int Version { get; }
+        DateTime OccuredDate { get; }
     }
 }

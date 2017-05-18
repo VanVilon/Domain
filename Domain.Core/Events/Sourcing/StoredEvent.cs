@@ -18,7 +18,7 @@ namespace Domain.Model.Events.Sourcing
 
         public IDomainEvent ToDomainEvent()
         {
-            var domainEvent = (IDomainEvent) JsonConvert.DeserializeObject(EventBody.Content, this.Type);
+            var domainEvent = (IDomainEvent) JsonConvert.DeserializeObject(this.EventBody.Content, this.Type);
             return domainEvent;
         }
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Domain.Model.Events;
 using Domain.Model.Events.Sourcing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,7 +39,7 @@ namespace Domain.Model.UnitTests.Events.Sourcing
         }
     }
 
-    public class TestEvent : IDomainEvent
+    internal class TestEvent : IDomainEvent
     {
         public int Version { get; set; }
         public DateTime OccuredDate { get; set; }
