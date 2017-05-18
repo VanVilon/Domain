@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Model;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Domain.Core.UnitTests
+namespace Domain.Model.UnitTests
 {
+    [TestClass]
     public class EntityTests
     {
-        [Fact]
+        [TestMethod]
         public void Entity_provides_unique_identifier()
         {
             var identity = Guid.NewGuid();
             var testEntity = new Product(identity);
 
-            Assert.True(testEntity.GetIdentityComponents().Contains(identity));
+            Assert.IsTrue(testEntity.GetIdentityComponents().Contains(identity));
         }
     }
 
