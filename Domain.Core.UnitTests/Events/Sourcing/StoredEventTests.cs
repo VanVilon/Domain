@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Domain.Model.Events;
 using Domain.Model.Events.Sourcing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
-using Xunit;
 
 namespace Domain.Model.UnitTests.Events.Sourcing
 {
+    [TestClass]
     public class StoredEventTests
     {
-        [Fact]
+        [TestMethod]
         public void Can_convert_stored_event_to_domain_event()
         {
             var eventBody = JsonConvert.SerializeObject(new TestEvent() {SomeimportantProperty = "lol"});
             var storedEvent = new StoredEvent(typeof(TestEvent), new EventBody(eventBody));
 
             var domainEvent = (TestEvent) storedEvent.ToDomainEvent();
-            Assert.IsType<TestEvent>(domainEvent);
-            Assert.Equal("lol", domainEvent.SomeimportantProperty);
+            Assert.IsInstanceOfType(domainEvent, typeof(TestEvent));
+            Assert.AreEqual("lol", domainEvent.SomeimportantProperty);
         }
     }
 

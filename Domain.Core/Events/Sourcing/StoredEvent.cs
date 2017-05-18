@@ -10,15 +10,16 @@ namespace Domain.Model.Events.Sourcing
 
         public StoredEvent(Type type, EventBody eventBody)
         {
+            if (type.IsAssignableFrom(typeof(IDomainEvent)))
+                throw new InvalidOperationException("StoredEvent type must implement IDomainEvent");
             Type = type;
             EventBody = eventBody;
         }
 
         public IDomainEvent ToDomainEvent()
         {
-            var domainEvent = JsonConvert.DeserializeObject(EventBody.Content);
-
-            return (IDomainEvent) Convert.ChangeType(domainEvent, Type);
+            var domainEvent = (IDomainEvent) JsonConvert.DeserializeObject(EventBody.Content, this.Type);
+            return domainEvent;
         }
 
         public bool Equals(StoredEvent other)
