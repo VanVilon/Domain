@@ -3,7 +3,7 @@
 namespace Domain.Model
 {
     /// <summary>
-    /// Identifies this class as 'value object' container.
+    /// Overriden in a class, identifies this class as 'value object'.
     /// </summary>
     /// <remarks>
     /// DDD tip: value objects should be immutable.

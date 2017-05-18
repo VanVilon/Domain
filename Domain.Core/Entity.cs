@@ -8,11 +8,11 @@ namespace Domain.Model
     /// <summary>
     /// Overriden in a class, identifies this class as 'entity'.
     /// </summary>
-    public abstract class Entity
+    public interface IEntity
     {
     }
 
-    public abstract class EntityWithCompositeId : Entity, IEquatable<EntityWithCompositeId>
+    public abstract class EntityWithCompositeId : IEntity, IEquatable<EntityWithCompositeId>
     {
         public abstract IEnumerable<object> GetIdentityComponents();
 
