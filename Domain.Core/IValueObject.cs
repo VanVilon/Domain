@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Core
+namespace Domain.Model
 {
     /// <summary>
     /// Identifies this class as 'value object' container.
