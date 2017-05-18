@@ -4,7 +4,7 @@ using System.Linq;
 using Domain.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Domain.Core.UnitTests
+namespace Domain.Model.UnitTests
 {
     [TestClass]
     public class EntityTests
