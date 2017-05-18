@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Model;
 using Xunit;
 
 namespace Domain.Core.UnitTests

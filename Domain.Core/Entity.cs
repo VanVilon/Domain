@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Core.Helpers;
+using Domain.Model.Helpers;
 
-namespace Domain.Core
+namespace Domain.Model
 {
     /// <summary>
     /// Identifies this class as 'entity' container.

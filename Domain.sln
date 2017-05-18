@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Core", "Domain.Core\Domain.Core.csproj", "{631B4941-EA94-46AE-B70E-37BA9F71FD48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Model", "Domain.Core\Domain.Model.csproj", "{631B4941-EA94-46AE-B70E-37BA9F71FD48}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Core.UnitTests", "Domain.Core.UnitTests\Domain.Core.UnitTests.csproj", "{7CA5CB15-6A62-4BFB-80B9-BE68F321CA63}"
 EndProject
