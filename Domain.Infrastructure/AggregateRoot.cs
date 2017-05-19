@@ -36,7 +36,12 @@ namespace Domain.Infrastructure
             Handle(@event);
         }
 
-        protected void Handle(IDomainEvent @event)
+        protected void RegisterHandler<T>(Action<T> handler)
+        {
+            _handlers.Add(typeof(T), e => handler((T) e));
+        }
+
+        private void Handle(IDomainEvent @event)
         {
             if (!_handlers.ContainsKey(@event.GetType()))
                 throw new InvalidOperationException($"Missing handler for {@event.GetType()}");
@@ -44,11 +49,6 @@ namespace Domain.Infrastructure
             _handlers[@event.GetType()](@event);
             _uncommitedEvents.Add(@event);
             Version++;
-        }
-
-        protected void RegisterHandler<T>(Action<T> handler)
-        {
-            _handlers.Add(typeof(T), e => handler((T) e));
         }
     }
 }
