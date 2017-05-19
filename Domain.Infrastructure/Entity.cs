@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Model.Helpers;
+using Domain.Infrastructure.Helpers;
 
-namespace Domain.Model
+namespace Domain.Infrastructure
 {
     /// <summary>
-    /// Identifies this class as 'entity' container.
+    /// Overriden in a class, identifies this class as 'entity'.
     /// </summary>
-    public abstract class Entity
+    public interface IEntity
     {
     }
 
-    public abstract class EntityWithCompositeId : Entity, IEquatable<EntityWithCompositeId>
+    public abstract class EntityWithCompositeId : IEntity, IEquatable<EntityWithCompositeId>
     {
         public abstract IEnumerable<object> GetIdentityComponents();
 
@@ -23,9 +23,9 @@ namespace Domain.Model
 
         public override bool Equals(object obj)
         {
-            if (Object.ReferenceEquals(null, obj))
+            if (object.ReferenceEquals(null, obj))
                 return false;
-            if (Object.ReferenceEquals(this, obj))
+            if (object.ReferenceEquals(this, obj))
                 return true;
             if (obj.GetType() != this.GetType())
                 return false;
