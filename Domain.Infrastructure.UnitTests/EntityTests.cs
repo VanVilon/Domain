@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Domain.Model.UnitTests
+namespace Domain.Infrastructure.UnitTests
 {
     [TestClass]
     public class EntityTests

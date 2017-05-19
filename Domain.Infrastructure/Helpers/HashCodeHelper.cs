@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Domain.Model.Helpers
+namespace Domain.Infrastructure.Helpers
 {
     internal static class HashCodeHelper
     {
