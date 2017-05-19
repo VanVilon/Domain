@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Domain.Infrastructure;
-using Domain.Infrastructure.Events;
-using Domain.Persistence.DefaultProvider;
+using Domain.Infrastructure.Persistence.DefaultProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace Domain.Persistence.UnitTests
+namespace Domain.UnitTests.Persistence
 {
     [TestClass]
     public class InMemoryRepositoryTests

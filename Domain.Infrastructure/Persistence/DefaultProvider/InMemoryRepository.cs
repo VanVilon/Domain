@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Infrastructure;
 
-namespace Domain.Persistence.DefaultProvider
+namespace Domain.Infrastructure.Persistence.DefaultProvider
 {
     public abstract class InMemoryRepository<TEntity> : IRepository<TEntity> where TEntity: IAggregate
     {
