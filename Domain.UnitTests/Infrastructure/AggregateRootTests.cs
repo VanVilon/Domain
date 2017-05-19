@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Domain.Infrastructure;
 using Domain.Infrastructure.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Domain.Infrastructure.UnitTests
+namespace Domain.UnitTests.Infrastructure
 {
     [TestClass]
     public class AggregateRootTests
