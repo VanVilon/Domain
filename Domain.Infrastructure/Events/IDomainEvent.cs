@@ -7,7 +7,5 @@ namespace Domain.Infrastructure.Events
     /// </summary>
     public interface IDomainEvent
     {
-        int Version { get; }
-        DateTime OccuredDate { get; }
     }
 }
