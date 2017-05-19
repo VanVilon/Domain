@@ -9,11 +9,11 @@ namespace Domain.Infrastructure
     public interface IAggregate
     {
         Guid Id { get; }
-        int Version { get; }
+        uint Version { get; }
         IEnumerable<IDomainEvent> UncommitedEvents { get; }
-
-        void ApplyEvent(IDomainEvent @event);
+        
+        void Apply(IDomainEvent @event);
         void ClearUncommitedEvents();
-        void Recreate(List<IDomainEvent> events);
+        void LoadFromHistory(List<IDomainEvent> events);
     }
 }
