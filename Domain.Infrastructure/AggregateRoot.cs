@@ -41,7 +41,7 @@ namespace Domain.Infrastructure
             _handlers.Add(typeof(T), e => handler((T) e));
         }
 
-        protected void RaiseEvent(IDomainEvent @event)
+        private void RaiseEvent(IDomainEvent @event)
         {
             if (!_handlers.ContainsKey(@event.GetType()))
                 throw new InvalidOperationException($"Missing handler for {@event.GetType()}");
