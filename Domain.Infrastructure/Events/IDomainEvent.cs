@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.Model.Events
+namespace Domain.Infrastructure.Events
 {
     /// <summary>
     /// Overriden in a class, identifies this class as domain event.

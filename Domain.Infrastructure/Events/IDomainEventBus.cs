@@ -1,4 +1,4 @@
-﻿namespace Domain.Model.Events
+﻿namespace Domain.Infrastructure.Events
 {
     public interface IDomainEventBus
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Model.Helpers;
+using Domain.Infrastructure.Helpers;
 
-namespace Domain.Model
+namespace Domain.Infrastructure
 {
     /// <summary>
     /// Overriden in a class, identifies this class as 'entity'.
