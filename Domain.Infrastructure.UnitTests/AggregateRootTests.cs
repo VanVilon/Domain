@@ -50,7 +50,7 @@ namespace Domain.Infrastructure.UnitTests
 
         public void IncreaseNumber(int number)
         {
-            Handle(new NumberIncreased(number));
+            RaiseEvent(new NumberIncreased(number));
         }
     }
 

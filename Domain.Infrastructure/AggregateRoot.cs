@@ -28,12 +28,12 @@ namespace Domain.Infrastructure
         public void LoadFromHistory(List<IDomainEvent> events)
         {
             foreach (var @event in events)
-                Handle(@event);
+                RaiseEvent(@event);
         }
 
         public void Apply(IDomainEvent @event)
         {
-            Handle(@event);
+            RaiseEvent(@event);
         }
 
         protected void RegisterHandler<T>(Action<T> handler)
@@ -41,7 +41,7 @@ namespace Domain.Infrastructure
             _handlers.Add(typeof(T), e => handler((T) e));
         }
 
-        private void Handle(IDomainEvent @event)
+        protected void RaiseEvent(IDomainEvent @event)
         {
             if (!_handlers.ContainsKey(@event.GetType()))
                 throw new InvalidOperationException($"Missing handler for {@event.GetType()}");
