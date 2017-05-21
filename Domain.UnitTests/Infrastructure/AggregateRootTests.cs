@@ -1,4 +1,6 @@
-﻿using Domain.Infrastructure;
+﻿using System.Collections;
+using System.Collections.Generic;
+using Domain.Infrastructure;
 using Domain.Infrastructure.Events;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -33,7 +35,7 @@ namespace Domain.UnitTests.Infrastructure
         }
     }
 
-    internal class TestAggregate : AggregateRoot
+    public class TestAggregate : AggregateRoot
     {
         public TestAggregate()
         {
@@ -41,6 +43,7 @@ namespace Domain.UnitTests.Infrastructure
         }
 
         public int Number { get; set; }
+
         private void HandleNumberIncreasedEvent(NumberIncreased @event)
         {
             Number += @event.Number;

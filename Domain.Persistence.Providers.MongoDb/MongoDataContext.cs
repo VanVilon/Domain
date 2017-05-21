@@ -11,14 +11,15 @@ namespace Domain.Persistence.Providers.MongoDb
     public class MongoDataContext : IDataContext
     {
         private readonly string _mongoDbName;
+        private readonly MongoClientSettings _settings;
         private readonly MongoClient _client;
 
         public IMongoDatabase GetDatabase() { return _client.GetDatabase(_mongoDbName); }
 
-        public MongoDataContext(string dburl, string dbname)
+        public MongoDataContext(MongoClientSettings settings, string mongoDbName)
         {
-            _mongoDbName = dbname;
-            _client = new MongoClient(dburl);
+            _mongoDbName = mongoDbName;
+            _client = new MongoClient(settings);
         }
 
         public void DropDatabase(string dbName)

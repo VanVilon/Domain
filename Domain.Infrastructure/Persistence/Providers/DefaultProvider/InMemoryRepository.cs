@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Domain.Infrastructure.Persistence.Providers.DefaultProvider
 {
@@ -13,14 +14,14 @@ namespace Domain.Infrastructure.Persistence.Providers.DefaultProvider
             return Collection.FirstOrDefault(entity => entity.Id == id);
         }
 
-        public TEntity FindOne(Func<TEntity, bool> predicate)
+        public TEntity FindOne(Expression<Func<TEntity, bool>> predicate)
         {
-            return Collection.FirstOrDefault(predicate);
+            return Collection.FirstOrDefault(predicate.Compile());
         }
 
-        public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
-            return Collection.Where(predicate);
+            return Collection.Where(predicate.Compile());
         }
 
         public void Add(TEntity entity)
