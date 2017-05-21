@@ -32,6 +32,11 @@ namespace Domain.Infrastructure.Persistence.Providers.DefaultProvider
         {
             Collection.Remove(entity);
         }
+
+        public void Update(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     internal class AggregateEqualityComparer<TEntity> : IEqualityComparer<TEntity> where TEntity: IAggregate
