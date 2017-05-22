@@ -13,7 +13,6 @@ namespace Domain.Persistence.Providers.MongoDb
     {
         private readonly MongoDataContext _mongoDataContext;
         private readonly IMongoCollection<TEntity> _mongoCollection;
-        protected readonly UniqueQueue<IMongoRepositoryChange> Changes = new UniqueQueue<IMongoRepositoryChange>();
 
         protected MongoDbRepository(MongoDataContext mongoDataContext)
         {
@@ -48,75 +47,15 @@ namespace Domain.Persistence.Providers.MongoDb
 
         public void Add(TEntity entity)
         {
-            Changes.Enqueue(new InsertedAggregate(entity));
         }
 
         public void Remove(TEntity entity)
         {
-            Changes.Enqueue(new DeletedAggregate(entity));
         }
 
         public void Update(TEntity entity)
         {
             //TODO add to changes
-        }
-
-        public void SaveChanges()
-        {
-            //TODO Commit changes to mongodb server
-        }
-    }
-
-    public interface IMongoRepositoryChange
-    {
-        void Apply(IMongoCollection<IAggregate> collection);
-    }
-
-    public class DeletedAggregate : IMongoRepositoryChange, IEquatable<DeletedAggregate>
-    {
-        private readonly Guid _aggregateId;
-
-        public DeletedAggregate(Guid aggregateId)
-        {
-            _aggregateId = aggregateId;
-        }
-
-        public void Apply(IMongoCollection<IAggregate> collection)
-        {
-            collection.DeleteOne(aggregate => aggregate.Id == _aggregateId);
-        }
-
-        public bool Equals(DeletedAggregate other)
-        {
-            if (ReferenceEquals(null, other)) return false;
-            if (ReferenceEquals(this, other)) return true;
-            return other._aggregateId == this._aggregateId;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals((DeletedAggregate) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return _aggregateId.GetHashCode();
-        }
-    }
-
-    public class InsertedAggregate : IMongoRepositoryChange
-    {
-        private readonly IAggregate _aggregate;
-
-        public InsertedAggregate(IAggregate aggregate)
-        {
-            _aggregate = aggregate;
-        }
-
-        public void Apply(IMongoCollection<IAggregate> collection)
-        {
-            collection.InsertOne(_aggregate);
-            //TODO investigate BsonClassMap
         }
     }
 }
