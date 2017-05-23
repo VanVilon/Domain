@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Domain.Infrastructure;
-using Domain.Infrastructure.Events;
+using Domain.UnitTests.Infrastructure.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Domain.UnitTests.Infrastructure
@@ -32,36 +31,6 @@ namespace Domain.UnitTests.Infrastructure
             aggregate.Apply(new NumberIncreased(2));
             
             Assert.AreEqual(2, aggregate.Number);
-        }
-    }
-
-    public class TestAggregate : AggregateRoot
-    {
-        public TestAggregate()
-        {
-            this.RegisterHandler<NumberIncreased>(HandleNumberIncreasedEvent);
-        }
-
-        public int Number { get; set; }
-
-        private void HandleNumberIncreasedEvent(NumberIncreased @event)
-        {
-            Number += @event.Number;
-        }
-
-        public void IncreaseNumber(int number)
-        {
-            Apply(new NumberIncreased(number));
-        }
-    }
-
-    internal class NumberIncreased : IDomainEvent
-    {
-        public int Number { get; }
-
-        public NumberIncreased(int number)
-        {
-            this.Number = number;
         }
     }
 }

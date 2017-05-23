@@ -1,19 +1,38 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using Domain.Infrastructure;
 using Domain.Infrastructure.Helpers;
+using Domain.IntegrationTests.TestHelpers;
 using Domain.Persistence.Providers.MongoDb;
-using Domain.UnitTests.Infrastructure;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Adapter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Driver;
-using Moq;
-using NSubstitute;
 
-namespace Domain.UnitTests.Persistence.Providers.MongoDb
+namespace Domain.IntegrationTests.Providers.MongoDb
 {
     [TestClass]
-    public class MongoDbRepositoryTests
+    public class MongoDbRepositoryTests : IDisposable
     {
+        public MongoDbRepositoryTests()
+        {
+            try
+            {
+                this.Connect();
+            }
+            catch (Exception e)
+            {
+                throw new TestCanceledException("Could not connect to the test mongoDb server. See inner exception", e);
+            }
+        }
+
+        private bool Connect()
+        {
+            var connectionString = $"mongodb://test:123";
+            var localMongoClient = new MongoClient(connectionString);
+            var testDatabase = localMongoClient.GetDatabase("test");
+            //TODO connect to test database and create it if not exist.
+        }
 
         [TestMethod]
         public async Task Find_aggregate_by_id()
@@ -68,16 +87,19 @@ namespace Domain.UnitTests.Persistence.Providers.MongoDb
 
             Assert.IsTrue(repository.CurrentState.Contains(new DeletedAggregate(testAggregate.Id)));
         }
+
+        public void Dispose()
+        {
+
+        }
     }
 
     public class TestMongoRepository : MongoDbRepository<TestAggregate>
     {
         public TestMongoRepository() 
-            : base(new MongoDataContext(new MongoClientSettings(), "testDb"))
+            : base(new MongoDataContext(new MongoClientSettings(), "test"))
         {
             //TODO mock connection
         }
-
-        public UniqueQueue<IMongoRepositoryChange> CurrentState => base.Changes;
     }
 }
