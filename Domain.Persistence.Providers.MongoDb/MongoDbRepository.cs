@@ -47,15 +47,32 @@ namespace Domain.Persistence.Providers.MongoDb
 
         public void Add(TEntity entity)
         {
+            AddAsync(entity).Wait();
+        }
+
+        public async Task AddAsync(TEntity entity)
+        {
+            await _mongoCollection.InsertOneAsync(entity);
         }
 
         public void Remove(TEntity entity)
         {
+            RemoveAsync(entity).Wait();
+        }
+
+        public async Task RemoveAsync(TEntity entity)
+        {
+            await _mongoCollection.DeleteOneAsync(e => e.Id == entity.Id);
         }
 
         public void Update(TEntity entity)
         {
-            //TODO add to changes
+            UpdateAsync(entity).Wait();
+        }
+
+        public async Task UpdateAsync(TEntity entity)
+        {
+            await _mongoCollection.UpdateOneAsync(e => e.Id == entity.Id, new ObjectUpdateDefinition<TEntity>(entity));
         }
     }
 }
