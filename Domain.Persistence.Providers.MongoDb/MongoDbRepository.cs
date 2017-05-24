@@ -16,8 +16,7 @@ namespace Domain.Persistence.Providers.MongoDb
 
         protected MongoDbRepository(MongoDataContext mongoDataContext)
         {
-            var entityName = typeof(TEntity).Name.ToLower();
-
+            var entityName = typeof(TEntity).Name;
             _mongoDataContext = mongoDataContext;
             _mongoCollection = _mongoDataContext.GetDatabase().GetCollection<TEntity>(entityName);
         }
@@ -29,10 +28,7 @@ namespace Domain.Persistence.Providers.MongoDb
 
         public async Task<TEntity> FindByIdAsync(Guid id)
         {
-            var entityName = typeof(TEntity).Name.ToLower();
-
-            var mongoCollection = _mongoDataContext.GetDatabase().GetCollection<TEntity>(entityName);
-            return await mongoCollection.Find(entity => entity.Id == id).FirstOrDefaultAsync();
+            return await _mongoCollection.Find(entity => entity.Id == id).FirstOrDefaultAsync();
         }
 
         public TEntity FindOne(Expression<Func<TEntity, bool>> predicate)
