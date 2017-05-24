@@ -1,4 +1,5 @@
-﻿using Domain.Infrastructure;
+﻿using System;
+using Domain.Infrastructure;
 
 namespace Domain.IntegrationTests.TestHelpers
 {
@@ -9,11 +10,19 @@ namespace Domain.IntegrationTests.TestHelpers
             Number = number;
         }
 
-        public int Number { get; }
+        public int Number { get; protected set; }
+    }
 
-        public static TestAggregate DummyData()
+    public static class TestAggregateDummyData
+    {
+        private static TestAggregate dummyData;
+
+        public static TestAggregate Get()
         {
-            return new TestAggregate(1);
+            if(dummyData == null)
+                dummyData = new TestAggregate(1);
+
+            return dummyData;
         }
     }
 }

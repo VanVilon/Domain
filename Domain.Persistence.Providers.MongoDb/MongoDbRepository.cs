@@ -11,24 +11,22 @@ namespace Domain.Persistence.Providers.MongoDb
 {
     public abstract class MongoDbRepository<TEntity> : IRepository<TEntity> where TEntity: IAggregate
     {
-        private readonly MongoDataContext _mongoDataContext;
         private readonly IMongoCollection<TEntity> _mongoCollection;
 
         protected MongoDbRepository(MongoDataContext mongoDataContext)
         {
             var entityName = typeof(TEntity).Name;
-            _mongoDataContext = mongoDataContext;
-            _mongoCollection = _mongoDataContext.GetDatabase().GetCollection<TEntity>(entityName);
+            _mongoCollection = mongoDataContext.GetDatabase().GetCollection<TEntity>(entityName);
         }
 
         public TEntity FindById(Guid id)
         {
-            return this.FindByIdAsync(id).Result;
+            return FindByIdAsync(id).Result;
         }
 
         public async Task<TEntity> FindByIdAsync(Guid id)
         {
-            return await _mongoCollection.Find(entity => entity.Id == id).FirstOrDefaultAsync();
+            return await _mongoCollection.Find(entity => entity.Id == id).SingleAsync();
         }
 
         public TEntity FindOne(Expression<Func<TEntity, bool>> predicate)
