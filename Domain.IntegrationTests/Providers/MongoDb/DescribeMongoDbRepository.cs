@@ -23,7 +23,7 @@ namespace Domain.IntegrationTests.Providers.MongoDb
         public void BeforeAll()
         {
             CreateConnection();
-            _repository = new TestMongoRepository(new MongoDataContext(Runner.ConnectionString, "test"));
+            _repository = new TestMongoRepository(new MongoDataContext(ConnectionString, "test"));
         }
 
         [TestClass]
@@ -54,20 +54,19 @@ namespace Domain.IntegrationTests.Providers.MongoDb
         [ClassCleanup]
         public static void Cleanup()
         {
-            Runner.Dispose();
         }
     }
 
     public abstract class MongoIntegrationTestsBase
     {
-        protected static MongoDbRunner Runner;
+        protected static string ConnectionString;
         protected static MongoCollectionBase<TestAggregate> Collection;
 
         internal static void CreateConnection()
         {
-            Runner = MongoDbRunner.Start();
+            ConnectionString = @"mongodb://localhost:27017";
 
-            var mongoClient = new MongoClient(Runner.ConnectionString);
+            var mongoClient = new MongoClient(ConnectionString);
             var db = mongoClient.GetDatabase("test");
 
             BsonClassMap.RegisterClassMap<TestAggregate>(cm =>
