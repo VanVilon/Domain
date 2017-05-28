@@ -14,49 +14,28 @@ using Shouldly;
 
 namespace Domain.IntegrationTests.Providers.MongoDb
 {
-    public class DescribeMongoDbRepository : MongoIntegrationTestsBase
+    [TestClass]
+    public class DescribeMongoDbRepository : MongoDbRepositorySpecs
     {
-        private static TestMongoRepository _repository;
-
-        [TestInitialize]
-        public void BeforeAll()
+        [TestMethod]
+        public void Given_db_connection_when_calling_FindById_and_aggregate_exists_finds_an_aggregate_by_id()
         {
+            var testAggregate = TestAggregateDummyData.Get();
+            //Given
             CreateConnection();
-            _repository = new TestMongoRepository(new MongoDataContext(ConnectionString, "test"));
-        }
+            var repository = new TestMongoRepository(new MongoDataContext(ConnectionString, "test"));
 
-        [TestClass]
-        public class FindById : DescribeMongoDbRepository
-        {
-            private static TestAggregate _result;
-            private TestAggregate _dummyData;
+            //When
+            Collection.Find(aggregate => aggregate.Id == testAggregate.Id).Single().ShouldNotBeNull();
+            var result = repository.FindById(testAggregate.Id);
 
-            [TestInitialize]
-            public void Before()
-            {
-                _dummyData = TestAggregateDummyData.Get();
-            }
-
-            [TestMethod]
-            public void Given_id_when_aggregate_exists_it_collects_aggregate_from_db_with_expected_data()
-            {
-                var existingAggregate = Collection.Find(aggregate => aggregate.Id == _dummyData.Id).Single();
-                existingAggregate.ShouldNotBeNull();
-
-                _result = _repository.FindById(_dummyData.Id);
-                _result.ShouldNotBeNull();
-                _result.Id.ShouldBe(_dummyData.Id);
-                _result.Number.ShouldBe(_dummyData.Number);
-            }
-        }
-
-        [ClassCleanup]
-        public static void Cleanup()
-        {
+            //Then
+            result.Id.ShouldBe(testAggregate.Id);
+            result.Number.ShouldBe(testAggregate.Number);
         }
     }
 
-    public abstract class MongoIntegrationTestsBase
+    public abstract class MongoDbRepositorySpecs
     {
         protected static string ConnectionString;
         protected static MongoCollectionBase<TestAggregate> Collection;
@@ -74,12 +53,14 @@ namespace Domain.IntegrationTests.Providers.MongoDb
                 cm.MapMember(c => c.Number);
             });
 
-            //MongoDefaults.GuidRepresentation = GuidRepresentation.Standard;
-
             Collection = (MongoCollectionBase<TestAggregate>) db.GetCollection<TestAggregate>(nameof(TestAggregate));
 
             //Dummy data init
             Collection.InsertOne(TestAggregateDummyData.Get());
+        }
+
+        internal static void DestroyTestDb(){
+            Collection.Database.DropCollection(nameof(TestAggregate));
         }
     }
 

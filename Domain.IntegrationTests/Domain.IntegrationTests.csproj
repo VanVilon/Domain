@@ -6,11 +6,10 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0-preview1-final" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170517-02" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.*" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.17" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.17" />
     <PackageReference Include="Shouldly" Version="2.8.2" />
-    <PackageReference Include="Machine.Specifications" Version="0-11-0" />
   </ItemGroup>
 
   <ItemGroup>
