@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -6,19 +6,19 @@
 
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.0-preview1-final" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0-preview-20170517-02" />
-    <PackageReference Include="Moq" Version="4.7.10" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.*" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.17" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.17" />
-    <PackageReference Include="NSubstitute" Version="2.0.3" />
+    <PackageReference Include="Shouldly" Version="2.8.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain.Infrastructure\Domain.Infrastructure.csproj" />
-    <ProjectReference Include="..\Domain.Persistence.Providers.MongoDb\Domain.Persistence.Providers.MongoDb.csproj" />
+    <ProjectReference Include="..\..\Domain.Infrastructure\Domain.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Domain.Persistence.Providers.MongoDb\Domain.Persistence.Providers.MongoDb.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
+
 </Project>
