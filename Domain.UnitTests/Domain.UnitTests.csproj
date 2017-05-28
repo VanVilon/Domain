@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain.Infrastructure\Domain.Infrastructure.csproj" />
+    <ProjectReference Include="..\Domain.Persistence.Providers.MongoDb\Domain.Persistence.Providers.MongoDb.csproj" />
   </ItemGroup>
 
   <ItemGroup>

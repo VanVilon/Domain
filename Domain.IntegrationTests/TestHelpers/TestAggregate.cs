@@ -1,5 +1,7 @@
 ﻿using System;
 using Domain.Infrastructure;
+using Domain.IntegrationTests.Providers.MongoDb;
+using MongoDB.Bson.Serialization;
 
 namespace Domain.IntegrationTests.TestHelpers
 {
@@ -8,21 +10,23 @@ namespace Domain.IntegrationTests.TestHelpers
         public TestAggregate(int number)
         {
             Number = number;
+            RegisterHandler<NumberChanged>(Apply);
+        }
+
+        private void Apply(NumberChanged e)
+        {
+            Number = e.Number;
         }
 
         public int Number { get; protected set; }
     }
 
-    public static class TestAggregateDummyData
+    public class TestAggregateMap : BsonClassMap<TestAggregate>
     {
-        private static TestAggregate dummyData;
-
-        public static TestAggregate Get()
+        public TestAggregateMap()
         {
-            if(dummyData == null)
-                dummyData = new TestAggregate(1);
-
-            return dummyData;
+            this.AutoMap();
+            this.MapMember(c => c.Number);
         }
     }
 }

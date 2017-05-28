@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Domain.Infrastructure;
 using Domain.Infrastructure.Helpers;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace Domain.Persistence.Providers.MongoDb
@@ -66,7 +67,7 @@ namespace Domain.Persistence.Providers.MongoDb
 
         public async Task UpdateAsync(TEntity entity)
         {
-            await _mongoCollection.UpdateOneAsync(e => e.Id == entity.Id, new ObjectUpdateDefinition<TEntity>(entity));
+            await _mongoCollection.ReplaceOneAsync(e => e.Id == entity.Id, entity);
         }
     }
 }
