@@ -4,7 +4,6 @@ using Domain.Infrastructure;
 using Domain.IntegrationTests.TestHelpers;
 using Domain.Persistence.Providers.MongoDb;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Mongo2Go;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Conventions;
