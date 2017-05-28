@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Domain.Infrastructure;
-using Domain.Infrastructure.Persistence.DefaultProvider;
+using Domain.Infrastructure.Persistence.Providers.DefaultProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 
-namespace Domain.UnitTests.Persistence
+namespace Domain.UnitTests.Persistence.Providers.DefaultProvider
 {
     [TestClass]
     public class InMemoryRepositoryTests
@@ -78,6 +78,21 @@ namespace Domain.UnitTests.Persistence
             repository.Remove(entity);
 
             Assert.AreEqual(0, repository.CurrentState.Count);
+        }
+
+        [TestMethod]
+        public void Cant_remove_non_added_entity()
+        {
+            var entity = Substitute.For<AggregateRoot>();
+            var repository = new InMemoryTestRepository();
+            
+            repository.Add(Substitute.For<AggregateRoot>());
+
+            Assert.AreEqual(1, repository.CurrentState.Count);
+
+            repository.Remove(entity);
+
+            Assert.AreEqual(1, repository.CurrentState.Count);
         }
     }
 

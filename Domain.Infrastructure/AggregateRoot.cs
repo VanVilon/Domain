@@ -8,7 +8,7 @@ namespace Domain.Infrastructure
     {
         private readonly List<IDomainEvent> _uncommitedEvents;
         private readonly Dictionary<Type, Action<object>> _handlers;
-        public Guid Id { get; }
+        public Guid Id { get; protected set; }
         public uint Version { get; protected set; }
 
         public IEnumerable<IDomainEvent> UncommitedEvents => _uncommitedEvents;
