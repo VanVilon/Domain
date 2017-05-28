@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Domain.Infrastructure
+namespace Domain.Infrastructure.Persistence
 {
-    public interface ICommand
+    public interface IDataContext
     {
     }
 }
