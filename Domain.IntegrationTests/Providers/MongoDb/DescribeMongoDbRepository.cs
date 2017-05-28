@@ -15,7 +15,7 @@ using Shouldly;
 
 namespace Domain.IntegrationTests.Providers.MongoDb
 {
-    public class Describe_MongoDbRepository : MongoIntegrationTestsBase
+    public class DescribeMongoDbRepository : MongoIntegrationTestsBase
     {
         private static TestMongoRepository _repository;
 
@@ -23,11 +23,11 @@ namespace Domain.IntegrationTests.Providers.MongoDb
         public void BeforeAll()
         {
             CreateConnection();
-            _repository = new TestMongoRepository(new MongoDataContext("mongodb://localhost:27017", "test"));
+            _repository = new TestMongoRepository(new MongoDataContext(Runner.ConnectionString, "test"));
         }
 
         [TestClass]
-        public class FindById : Describe_MongoDbRepository
+        public class FindById : DescribeMongoDbRepository
         {
             private static TestAggregate _result;
             private TestAggregate _dummyData;
@@ -61,13 +61,13 @@ namespace Domain.IntegrationTests.Providers.MongoDb
     public abstract class MongoIntegrationTestsBase
     {
         protected static MongoDbRunner Runner;
-        protected static IMongoCollection<TestAggregate> Collection;
+        protected static MongoCollectionBase<TestAggregate> Collection;
 
         internal static void CreateConnection()
         {
             Runner = MongoDbRunner.Start();
 
-            var mongoClient = new MongoClient();
+            var mongoClient = new MongoClient(Runner.ConnectionString);
             var db = mongoClient.GetDatabase("test");
 
             BsonClassMap.RegisterClassMap<TestAggregate>(cm =>
@@ -78,7 +78,7 @@ namespace Domain.IntegrationTests.Providers.MongoDb
 
             //MongoDefaults.GuidRepresentation = GuidRepresentation.Standard;
 
-            Collection = db.GetCollection<TestAggregate>(nameof(TestAggregate));
+            Collection = (MongoCollectionBase<TestAggregate>) db.GetCollection<TestAggregate>(nameof(TestAggregate));
 
             //Dummy data init
             Collection.InsertOne(TestAggregateDummyData.Get());
