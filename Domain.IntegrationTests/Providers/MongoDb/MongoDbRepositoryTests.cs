@@ -1,22 +1,16 @@
 ﻿using System;
 using System.Linq;
-using Domain.Infrastructure;
 using Domain.Infrastructure.Events;
 using Domain.IntegrationTests.TestHelpers;
 using Domain.Persistence.Providers.MongoDb;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Conventions;
-using MongoDB.Bson.Serialization.IdGenerators;
-using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Driver;
 using Shouldly;
 
 namespace Domain.IntegrationTests.Providers.MongoDb
 {
     [TestClass]
-    public class DescribeMongoDbRepository : MongoDbRepositorySpecs
+    public class MongoDbRepositoryTests : MongoDbRepositorySpecs
     {
         private TestMongoRepository _repository;
         private string _testDb;
