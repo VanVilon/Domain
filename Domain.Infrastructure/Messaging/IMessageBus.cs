@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using Domain.Infrastructure.Events;
 
-namespace Domain.Infrastructure.Events
+namespace Domain.Infrastructure.Messaging
 {
     public interface IMessageBus
     {
