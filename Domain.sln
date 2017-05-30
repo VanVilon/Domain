@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26510.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Infrastructure", "Domain.Infrastructure\Domain.Infrastructure.csproj", "{C305FD82-2744-4B1D-8A07-0B01D2E263ED}"
 EndProject
@@ -9,11 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.UnitTests", "Domain.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Persistence.Providers.MongoDb", "Domain.Persistence.Providers.MongoDb\Domain.Persistence.Providers.MongoDb.csproj", "{C5D4107D-EEF3-4BD8-9554-D685E7AFEE1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.IntegrationTests", "Domain.IntegrationTests\Domain.IntegrationTests.csproj", "{731BEBFB-B7E9-49B2-A0EE-FFEF52D995AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.IntegrationTests", "Domain.IntegrationTests\Domain.IntegrationTests.csproj", "{731BEBFB-B7E9-49B2-A0EE-FFEF52D995AD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{21AFBB3E-B593-4E6D-964E-4594CE91CD36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Messaging.RabbitMq", "Domain.Messaging.RabbitMq\Domain.Messaging.RabbitMq.csproj", "{421FB7D7-5971-48DB-97C9-25DA2C649130}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Messaging.RabbitMq", "Domain.Messaging.RabbitMq\Domain.Messaging.RabbitMq.csproj", "{421FB7D7-5971-48DB-97C9-25DA2C649130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

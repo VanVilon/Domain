@@ -5,7 +5,7 @@ using Domain.Infrastructure.Messaging;
 
 namespace Domain.Infrastructure
 {
-    public interface ICommand : IMessage
+    public interface ICommand
     {
     }
 }
