@@ -1,4 +1,5 @@
 ﻿using System;
+using Domain.Infrastructure.Messaging;
 
 namespace Domain.Infrastructure.Events
 {
