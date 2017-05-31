@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  roomate.matcher.service:
+    image: roomate.matcher.service
+    build:
+      context: ./Roomate.Matcher.Service
+      dockerfile: Dockerfile
