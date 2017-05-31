@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <ProjectVersion>2.0</ProjectVersion>
     <DockerTargetOS>Linux</DockerTargetOS>
-    <ProjectGuid>6bd81f7a-ad30-497e-a025-e1b4116b4a80</ProjectGuid>
+    <ProjectGuid>ff9ee1e5-7947-47a8-91b4-2b47ffc7808f</ProjectGuid>
     <DockerLaunchBrowser>True</DockerLaunchBrowser>
     <DockerServiceUrl>http://localhost:{ServicePort}/api/values</DockerServiceUrl>
     <DockerServiceName>service</DockerServiceName>
