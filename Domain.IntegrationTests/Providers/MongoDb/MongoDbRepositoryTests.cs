@@ -2,9 +2,11 @@
 using System.Linq;
 using Domain.Infrastructure.Events;
 using Domain.IntegrationTests.TestHelpers;
+using Domain.Messaging.RabbitMq;
 using Domain.Persistence.Providers.MongoDb;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MongoDB.Driver;
+using RawRabbit.Configuration;
 using Shouldly;
 
 namespace Domain.IntegrationTests.Providers.MongoDb
