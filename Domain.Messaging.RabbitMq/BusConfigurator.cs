@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Domain.Infrastructure.Messaging;
 using Microsoft.Extensions.Configuration;
 using RawRabbit;
 using RawRabbit.Configuration;
@@ -10,10 +11,10 @@ namespace Domain.Messaging.RabbitMq
 {
     public static class BusConfigurator
     {
-        public static IBusClient ConfigureBus(RawRabbitConfiguration config)
+        public static IDomainEventBus ConfigureBus(RawRabbitConfiguration config)
         {
             var client = BusClientFactory.CreateDefault(config);
-            return client;
+            return new RawRabbitEventBus(client);
         }
     }
 }

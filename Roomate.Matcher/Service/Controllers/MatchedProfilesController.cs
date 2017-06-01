@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using ProfilesMatcher.Domain.Model.Profiles;
+using ProfilesMatcher.Domain.Model.MatchedProfiles;
+using ProfilesMatcher.Domain.Model.MatchedProfiles.Events;
 
 namespace ProfilesMatcher.Service.Controllers
 {
@@ -25,7 +26,9 @@ namespace ProfilesMatcher.Service.Controllers
         [Route("{id}")]
         public MatchedProfile Get(Guid id)
         {
-            return new MatchedProfile(Guid.NewGuid(), new[] {Guid.NewGuid(), Guid.NewGuid()});
+            var matchedProfile = new MatchedProfile(Guid.NewGuid(), new[] {Guid.NewGuid(), Guid.NewGuid()});
+            matchedProfile.Apply(new ProfileMatched(matchedProfile.ProfileId, new List<Guid>{Guid.Empty}));
+            return matchedProfile;
         }
     }
 }
