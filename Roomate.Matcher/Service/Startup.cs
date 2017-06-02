@@ -39,8 +39,8 @@ namespace ProfilesMatcherContext.Service
             services.AddRawRabbit();
 
             services.AddTransient<MongoDbRepository<MatchedProfile>, MatchedProfilesRepository>();
-            services.AddSingleton(new MongoDataContext("mongodb://localhost", "profilesMatcher"));
-            services.AddSingleton(new ProfilesAdapter(new Uri("https://roomate-production.herokuapp.com/")));
+            services.AddSingleton(new MongoDataContext("mongodb://54.154.66.148/profilesMatcher", "profilesMatcher"));
+            services.AddSingleton(new ProfilesAdapter(new Uri("https://localhost:1234/")));
             services.AddTransient<IProfilesMatcher, ProfilesMatcher>();
         }
 
