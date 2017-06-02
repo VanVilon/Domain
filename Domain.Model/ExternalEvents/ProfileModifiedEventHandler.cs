@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Domain.Infrastructure;
 using Domain.Infrastructure.Messaging;
-using ProfilesMatcher.Domain.Model.MatchedProfiles.Events;
+using ProfilesMatcherContext.Domain.Model.Profiles;
+using ProfilesMatcherContext.Domain.Model.Profiles.Events;
 
-namespace ProfilesMatcher.Domain.Model.ExternalEvents
+namespace ProfilesMatcherContext.Domain.Model.ExternalEvents
 {
     public class ProfileModifiedEventHandler : IEventHandler<ProfileModified>
     {
@@ -21,13 +20,8 @@ namespace ProfilesMatcher.Domain.Model.ExternalEvents
 
         public async Task HandleAsync(ProfileModified message)
         {
-            (Guid profileId, Guid[] matchingProfiles) = await _matcher.RematchProfileAsync(message.ProfileId);
-            await _domainEventBus.Publish(new ProfileMatched(profileId, matchingProfiles));
+            var matchedProfile = await _matcher.RematchProfileAsync(message.ProfileId);
+            await _domainEventBus.Publish(new ProfileMatched(matchedProfile.ProfileId, matchedProfile.MatchingProfileIds));
         }
-    }
-
-    public interface IProfilesMatcher
-    {
-        Task<(Guid, Guid[])> RematchProfileAsync(Guid profileId);
     }
 }

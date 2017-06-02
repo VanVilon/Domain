@@ -1,34 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
-using ProfilesMatcher.Domain.Model.MatchedProfiles;
-using ProfilesMatcher.Domain.Model.MatchedProfiles.Events;
+using ProfilesMatcherContext.Domain.Model.Profiles;
+using ProfilesMatcherContext.Service.DataTransferObjects;
 
-namespace ProfilesMatcher.Service.Controllers
+namespace ProfilesMatcherContext.Service.Controllers
 {
     [Route("api/matchedProfiles")]
     public class MatchedProfilesController : Controller
     {
-        // GET api/matchedProfiles
-        [HttpGet]
-        public IEnumerable<MatchedProfile> Get()
+        private readonly IProfilesMatcher _matcher;
+
+        public MatchedProfilesController(IProfilesMatcher matcher)
         {
-            return new List<MatchedProfile>
-            {
-                new MatchedProfile(Guid.NewGuid(), new[] {Guid.NewGuid(), Guid.NewGuid() }),
-                new MatchedProfile(Guid.NewGuid(), new[] {Guid.NewGuid(), Guid.NewGuid() }),
-                new MatchedProfile(Guid.NewGuid(), new[] {Guid.NewGuid(), Guid.NewGuid() })
-            };
+            _matcher = matcher;
         }
 
         // GET api/matchedProfiles/:id
         [HttpGet]
         [Route("{id}")]
-        public MatchedProfile Get(Guid id)
+        public IActionResult Get(string id)
         {
-            var matchedProfile = new MatchedProfile(Guid.NewGuid(), new[] {Guid.NewGuid(), Guid.NewGuid()});
-            matchedProfile.Apply(new ProfileMatched(matchedProfile.ProfileId, new List<Guid>{Guid.Empty}));
-            return matchedProfile;
+            var response = new HttpResponseMessage(HttpStatusCode.OK);
+            try
+            {
+                MatchedProfile matchedProfile = _matcher.GetMatchedProfile(id);
+                return new JsonResult(Dtos.ToDto(matchedProfile));
+            }
+            catch (Exception)
+            {
+                //Log
+                throw;
+            }
         }
     }
 }

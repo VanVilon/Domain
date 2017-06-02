@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using Domain.Infrastructure.Events;
 
-namespace ProfilesMatcher.Domain.Model.MatchedProfiles.Events
+namespace ProfilesMatcherContext.Domain.Model.Profiles.Events
 {
     public class ProfileMatched : IDomainEvent
     {
-        public Guid ProfileId { get; }
-        public IEnumerable<Guid> MatchingProfileIds { get; }
+        public string ProfileId { get; }
+        public IEnumerable<string> MatchingProfileIds { get; }
 
-        public ProfileMatched(Guid profileId, IEnumerable<Guid> matchingProfileIds)
+        public ProfileMatched(string profileId, IEnumerable<string> matchingProfileIds)
         {
             ProfileId = profileId;
             MatchingProfileIds = matchingProfileIds;

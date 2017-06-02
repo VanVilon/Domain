@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Infrastructure;
-using ProfilesMatcher.Domain.Model.MatchedProfiles.Events;
+using ProfilesMatcherContext.Domain.Model.Profiles.Events;
 
-namespace ProfilesMatcher.Domain.Model.MatchedProfiles
+namespace ProfilesMatcherContext.Domain.Model.Profiles
 {
     public class MatchedProfile : AggregateRoot, IEventHandler<ProfileMatched>
     {
-        public Guid ProfileId { get; }
-        public IEnumerable<Guid> MatchingProfileIds { get; private set; }
+        public string ProfileId { get; private set; }
+        public IEnumerable<string> MatchingProfileIds { get; private set; }
         private readonly object _lock = new object();
 
-        public MatchedProfile(Guid profileId, IEnumerable<Guid> matchingProfileIds)
+        public MatchedProfile(string id, IEnumerable<string> matchingProfileIds)
         {
-            ProfileId = profileId;
+            ProfileId = id;
             MatchingProfileIds = matchingProfileIds;
 
             RegisterHandler<ProfileMatched>(async @event => await HandleAsync(@event));

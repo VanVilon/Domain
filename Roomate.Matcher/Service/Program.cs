@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ProfilesMatcher.Service
+namespace ProfilesMatcherContext.Service
 {
     public class Program
     {
