@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Domain.Infrastructure.Events;
+using Newtonsoft.Json;
 
 namespace Domain.Infrastructure
 {
@@ -8,9 +9,14 @@ namespace Domain.Infrastructure
     {
         private readonly List<IDomainEvent> _uncommitedEvents;
         private readonly Dictionary<Type, Action<object>> _handlers;
-        public Guid Id { get; protected set; }
-        public uint Version { get; protected set; }
 
+        [JsonIgnore]
+        public Guid Id { get; protected set; }
+
+        [JsonIgnore]
+        public uint Version { get; protected set; }
+        
+        [JsonIgnore]
         public IEnumerable<IDomainEvent> UncommitedEvents => _uncommitedEvents;
 
         protected AggregateRoot()
